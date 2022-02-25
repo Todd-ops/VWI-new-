@@ -1,0 +1,30 @@
+<div *ngFor="let item of title">
+  <h2 >
+    {{item.courseName}}
+  </h2>
+  <h6>
+    Revision Date: {{item.revDate | date: 'yyyy-MM-dd'}}
+  </h6>
+</div>
+
+
+<div *ngFor="let sections of section; let i = index">
+  <p [ngStyle]="{'font-size': '22px'}" *ngIf="(sections.indent1 !== null && !sections.indent1.trim()) && (sections.indent2 !== null && !sections.indent2.trim())"  >
+    <strong >{{sections.lineNbr}}.</strong>
+    <span [ngStyle]="{'margin-left': '10px'}"><strong>{{sections.docText}}</strong></span>
+    <img *ngFor="let item of image.children" src={{item.fileData}}/>
+  <p [ngStyle]="{'margin-left': '3em'}"
+    *ngIf="sections.indent1 === null || sections.indent1.trim()">
+    <strong>{{sections.lineNbr}}</strong>
+    <strong>{{sections.indent1}}</strong>
+    <span [ngStyle]="{'margin-left': '10px'}">{{sections.docText}}</span>
+    <img *ngFor="let item of image.children" src={{item.fileData}}/>
+  </p>
+  <p [ngStyle]="{'margin-left': '6em'}"
+    *ngIf="sections.indent2 === null || sections.indent2.trim()">
+    <strong>{{sections.lineNbr}}</strong>
+    <strong>{{sections.indent2}}</strong>
+    <span [ngStyle]="{'margin-left': '10px'}">{{sections.docText}}</span>
+  </p>
+</div>
+

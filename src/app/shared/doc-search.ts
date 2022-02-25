@@ -1,0 +1,33 @@
+export interface DocSearch {
+    docID: number;
+    courseName: string;
+    docSectionID: number;
+    level1: number;
+    level2: number;
+    level3: number;
+    docLevels: number;
+    lineNbr: string;
+    mediaID: number;
+    description: string;
+    fileData: object;
+    indent1: string;
+    indent2: string;
+    docText: string;
+    docSectGeneralHypeLnkID: number;
+    hyperlinkDescr: string;
+    hyperLinkText: string;
+    revDate: string;
+    courseID: number;
+    status: number;
+    docLinkID: string;
+    docLinkName: string;
+    binaryMedia: string;
+    courseGroupID: number;
+    descr: string;
+    jobCode: string;
+    workctR_DESC: string;
+    workCtrMF: number;
+    workCtrPS: string;
+    orederby: number;
+    workCenter: number;
+}
