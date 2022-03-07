@@ -23,3 +23,23 @@ h6{
     position: relative;
     
 } */
+img{
+    width:10%;
+    height: 10%;
+    margin-right: 20px;
+    cursor: pointer;
+    transition:transform 0.25s ease;
+}
+
+img:hover{
+    -webkit-transform:scale(100); /* or some other value */
+    transform:scale(10);
+}
+
+#ref{
+    color: deepskyblue;
+}
+
+#refID{
+    color: black;
+}

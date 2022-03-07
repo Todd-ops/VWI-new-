@@ -82,7 +82,7 @@ export class DropListsComponent implements OnInit {
    const formValue = this.searchForm.value;
    this.restApiService.getGroupByWCJC(formValue.WorkCenter, formValue.JobCode).subscribe((response => {
     this.result = response;
-    console.log(this.result)
+    // console.log(this.result)
     
   }))
  }
@@ -92,7 +92,7 @@ export class DropListsComponent implements OnInit {
   this.restApiService.getCourseByGroup(formValue.WorkCenter, formValue.JobCode).subscribe((response => {
     this.group = response; //=this.group
 
-    console.log(this.group)
+    // console.log(this.group)
   }))
   this.filterArray()
  }
@@ -114,7 +114,7 @@ export class DropListsComponent implements OnInit {
         }
       }
     }
-    console.log(filtered)
+    // console.log(filtered)
    }
  parseResults();
 };

@@ -20,7 +20,7 @@
       <tbody>
         <tr *ngFor="let item of apiCourseList | async | filter: searchText">
           <td  >
-            <li type="button" (click)="onDocIdClicked($event)">{{item.docID}}</li>   
+            <li type="button" value="{{item.docID}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docID}}"><u>{{item.docID}}</u></li>  
           </td>
           <td>
             {{ item.courseName }}

@@ -9,24 +9,30 @@ import { RestApiService } from '../../shared/rest-api.service';
   styleUrls: ['./doc-list.component.css']
 })
 export class DocListComponent implements OnInit {
- public result: any = []
- public title: any = []
- section: any = []
- image: any = []
- list1: any = []
- list2: any = []
+ public result: any = [];
+ public title: any = [];
+ section: any = [];
+ image: any = [];
+ list3: any = [];
+ list4: any = [];
+ list5: any = [];
+ list6: any = [];
+ media: any = [];
+ genLink: any = [];
  indent1 = false;
  indent2 = false;
+ showModal!: boolean;
   constructor(private activatedRoute: ActivatedRoute, private restApiService: RestApiService) {
     
    }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((d) =>{
-      this.getDocList(d['docId'])
+      // this.getDocList(d['docId'])
       this.getDocTitle(d['docId'])
       this.getDocSections(d['docId'])
       this.getImage(d['docId'])
+      this.getDocLink(d['docId'])
     })
 
     
@@ -38,47 +44,83 @@ export class DocListComponent implements OnInit {
     })
   }
 
-  getDocList(docId: number){
-    this.restApiService.getAllInfo(docId).subscribe((list: any) => {
-      this.result = list.filter((element: any, i: any) => i === list.indexOf(element))
-      console.log(this.result)
-    })
-  }
-
   getDocSections(docId: number){
     this.restApiService.getDocSectWithText(docId).subscribe((sections) => {
       this.section = sections
-      console.log(this.section)
+      // console.log(this.section)
     })
+    
   }
 
   getImage(docId: number){
     this.restApiService.getImageData(docId).subscribe((images) => {
       this.image = images
-      console.log(this.image)
+      // console.log(this.image)
+      this.filterLayout()
     })
-    this.filterLayout()
+   
+  }
+
+  getDocLink(docId: number){
+    this.restApiService.getGenLink(docId).subscribe((link) => {
+      this.genLink = link
+      console.log(this.genLink)
+      // this.filterLinks()
+      
+    })
   }
 
   filterLayout(){
-    const parseResults = () =>{
-      const images: Array<[any]> = this.image
+    const parseResult = () =>{
       const sections: Array<[any]> = this.section
-      const filtered: any = {};
-      for (this.list1 of sections){
-        filtered[`docSectionID${this.list1.docSectionID}`] = this.list1;
-        filtered[`docSectionID${this.list1.docSectionID}`].children = [];
+      const images: Array<[any]> = this.image
+      const links: Array<[any]> = this.genLink
+      const filter: any = {};
+      const genLinkFilter: any = {};
+      for (this.list3 of sections){
+        filter[`docSectionID${this.list3.docSectionID}`] = this.list3;
+        filter[`docSectionID${this.list3.docSectionID}`].children = [];
+        // filter[`docSectionID${this.list3.docSectionID}`].children = [];// Trying to get list of reference links
 
-        for (this.list2 of images) {
-          if (this.list2.docSectionID === this.list1.docSectionID){
-            filtered[`docSectionID${this.list1.docSectionID}`].children.push(this.list2)
+        for (this.list4 of images) {
+          if (this.list4.docSectionID === this.list3.docSectionID){
+            filter[`docSectionID${this.list3.docSectionID}`].children.push(this.list4)
           }
         }
+        for (this.list5 of links){
+          if (this.list5.docSectionID === this.list3.docSectionID){
+            filter[`docSectionID${this.list3.docSectionID}`].children.push(this.list5)
+          }
+          // if (this.list5.hyperLinkDescr !== null){
+          //   this.list5.hyperLinkDescr.trim()
+          // }
+        }
       }
-      console.log(filtered)
+      console.log(filter)
     }
-    parseResults();
+    parseResult();
+    
   };
+
+  // filterLinks(){
+  //   const parseLinks = () =>{
+  //     const sections: Array<[any]> = this.section
+  //     const links: Array<[any]> = this.genLink
+  //     const filter: any = {};
+  //     for (this.list6 of sections){
+  //       filter[`docSectionID${this.list6.docSectionID}`] = this.list6;
+  //       filter[`docSectionID${this.list6.docSectionID}`].children = [];
+
+  //       for (this.list5 of links){
+  //         if (this.list5.docSectionID === this.list6.docSectionID){
+  //           filter[`docSectionID${this.list6.docSectionID}`].children.push(this.list5)
+  //         }
+  //       }
+  //     }
+  //     console.log(filter)
+  //   }
+  //   parseLinks();
+  // };
 
   
 

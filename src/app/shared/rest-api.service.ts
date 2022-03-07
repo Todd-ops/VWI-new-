@@ -30,6 +30,16 @@ export class RestApiService  {
     
   }
 
+  getGenLink(docId: number){
+    let docLink = `http://10.51.8.92:443/api/VWIDocument/GetGenLink/${docId}`;
+    return this.http.get(docLink)
+  }
+
+  getMedia(event3: any){
+    // let media = (`http://10.51.8.92:443/api/VWIDocument/GetMedia/${event3}`, event3);
+    return this.http.get(`http://10.51.8.92:443/api/VWIDocument/GetMedia/${event3}`, event3)
+  }
+
   getImageData(docId: number){
       let img = `http://10.51.8.92:443/api/VWIDocument/ImageData/${docId}`;
       return this.http.get(img)

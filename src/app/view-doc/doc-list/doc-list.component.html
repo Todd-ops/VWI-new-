@@ -8,23 +8,32 @@
 </div>
 
 
-<div *ngFor="let sections of section; let i = index">
-  <p [ngStyle]="{'font-size': '22px'}" *ngIf="(sections.indent1 !== null && !sections.indent1.trim()) && (sections.indent2 !== null && !sections.indent2.trim())"  >
-    <strong >{{sections.lineNbr}}.</strong>
-    <span [ngStyle]="{'margin-left': '10px'}"><strong>{{sections.docText}}</strong></span>
-    <img *ngFor="let item of image.children" src={{item.fileData}}/>
+<div *ngFor="let image of section; let i = index">
+  <p [ngStyle]="{'font-size': '22px'}" *ngIf="(image.indent1 !== null && !image.indent1.trim()) && (image.indent2 !== null && !image.indent2.trim()) && (image.children !== null || image.children.trim())"  >
+    <strong >{{image.lineNbr}}.</strong>
+    <span [ngStyle]="{'margin-left': '10px'}"><strong>{{image.docText}}</strong></span><br>
+    <a ><img *ngFor="let item of image.children"  class="img" [src]="('data:image/jpeg;base64,' + item.fileData)"/></a>
+    <span [ngStyle]="{'margin-left': '3em'}" id="ref" type="button" *ngFor="let x of image.children"><b id="refID">Reference - </b>{{x.hyperlinkDescr}}</span>
+  </p>
+
   <p [ngStyle]="{'margin-left': '3em'}"
-    *ngIf="sections.indent1 === null || sections.indent1.trim()">
-    <strong>{{sections.lineNbr}}</strong>
-    <strong>{{sections.indent1}}</strong>
-    <span [ngStyle]="{'margin-left': '10px'}">{{sections.docText}}</span>
-    <img *ngFor="let item of image.children" src={{item.fileData}}/>
+    *ngIf="(image.indent1 === null || image.indent1.trim()) && (image.children !== null || image.children.trim() && image.hyperlinkDescr !== null || image.hyperlinkDescr.trim())" >
+    <strong>{{image.lineNbr}}</strong>
+    <strong>{{image.indent1}}</strong>
+    <span [ngStyle]="{'margin-left': '10px'}">{{image.docText}}</span><br>
+    <a ><img *ngFor="let item of image.children"  class="img" [src]="('data:image/jpeg;base64,' + item.fileData)"/></a>
+    <span [ngStyle]="{'margin-left': '3em'}" id="ref" type="button" *ngFor="let x of image.children"><b id="refID">Reference - </b>{{x.hyperlinkDescr}}</span>
   </p>
+
   <p [ngStyle]="{'margin-left': '6em'}"
-    *ngIf="sections.indent2 === null || sections.indent2.trim()">
-    <strong>{{sections.lineNbr}}</strong>
-    <strong>{{sections.indent2}}</strong>
-    <span [ngStyle]="{'margin-left': '10px'}">{{sections.docText}}</span>
+    *ngIf="(image.indent2 === null || image.indent2.trim()) && (image.children !== null || image.children.trim())">
+    <strong>{{image.lineNbr}}</strong>
+    <strong>{{image.indent2}}</strong>
+    <span [ngStyle]="{'margin-left': '10px'}">{{image.docText}}</span><br>
+    <img *ngFor="let item of image.children"  class="img" [src]="('data:image/jpeg;base64,' + item.fileData)" /><br>
+    <span [ngStyle]="{'margin-left': '3em'}" id="ref" type="button" *ngFor="let x of image.children"><b id="refID">Reference - </b>{{x.hyperlinkDescr}}</span>
   </p>
+
 </div>
+
 
