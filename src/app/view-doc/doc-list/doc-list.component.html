@@ -1,37 +1,123 @@
 <div *ngFor="let item of title">
-  <h2 >
+  <h1 >
     {{item.courseName}}
-  </h2>
+  </h1>
   <h6>
     Revision Date: {{item.revDate | date: 'yyyy-MM-dd'}}
   </h6>
 </div>
 
-
+<!--Prints line for top level-->
 <div *ngFor="let image of section; let i = index">
-  <p [ngStyle]="{'font-size': '22px'}" *ngIf="(image.indent1 !== null && !image.indent1.trim()) && (image.indent2 !== null && !image.indent2.trim()) && (image.children !== null || image.children.trim())"  >
+  <p [ngStyle]="{'font-size': '22px'}" *ngIf="(image.indent1 !== null && !image.indent1.trim()) && (image.indent2 !== null && !image.indent2.trim())">
+
     <strong >{{image.lineNbr}}.</strong>
-    <span [ngStyle]="{'margin-left': '10px'}"><strong>{{image.docText}}</strong></span><br>
-    <a ><img *ngFor="let item of image.children"  class="img" [src]="('data:image/jpeg;base64,' + item.fileData)"/></a>
-    <span [ngStyle]="{'margin-left': '3em'}" id="ref" type="button" *ngFor="let x of image.children"><b id="refID">Reference - </b>{{x.hyperlinkDescr}}</span>
+
+    <span [ngStyle]="{'margin-left': '10px'}"><strong>{{image.docText}}</strong></span>
+
+    <img 
+    *ngFor="let item of image.children"  
+    class="img" 
+    [hidden]="item.fileData === null"
+    [src]="('data:image/jpeg;base64,' + item.fileData)" />
+
+    
+
+    <li [ngStyle]="{'margin-left': '3em'}" 
+    id="ref" 
+    type="button" 
+    [hidden]="item.hyperlinkDescr === null"
+    *ngFor="let item of image.children"
+    value="{{item.hyperLinkText}}" 
+   (click)="openNewTab(item.hyperLinkText)">
+    <b id="refID">Reference - </b>{{item.hyperlinkDescr}}</li> 
+
+    <li [ngStyle]="{'margin-left': '3em'}" 
+    id="ref" 
+    type="button" 
+    [hidden]="item.docLinkID === null"
+    *ngFor="let item of image.children"
+    value="{{item.DocLinkID}}" 
+   >
+    <b id="refID">See Document - </b>{{item.courseName}}</li>
   </p>
 
+
+  <!--Prints line for middle level-->
   <p [ngStyle]="{'margin-left': '3em'}"
-    *ngIf="(image.indent1 === null || image.indent1.trim()) && (image.children !== null || image.children.trim() && image.hyperlinkDescr !== null || image.hyperlinkDescr.trim())" >
+    *ngIf="(image.indent1 === null || image.indent1.trim()) && (image.children !== null || image.children.trim())" >
+
     <strong>{{image.lineNbr}}</strong>
     <strong>{{image.indent1}}</strong>
+
     <span [ngStyle]="{'margin-left': '10px'}">{{image.docText}}</span><br>
-    <a ><img *ngFor="let item of image.children"  class="img" [src]="('data:image/jpeg;base64,' + item.fileData)"/></a>
-    <span [ngStyle]="{'margin-left': '3em'}" id="ref" type="button" *ngFor="let x of image.children"><b id="refID">Reference - </b>{{x.hyperlinkDescr}}</span>
+
+    
+    <img 
+    *ngFor="let item of image.children"  
+    class="img" 
+    [hidden]="item.fileData === null"
+    [src]="('data:image/jpeg;base64,' + item.fileData)" />
+
+    <br>
+
+    <li [ngStyle]="{'margin-left': '3em'}" 
+    id="ref" 
+    type="button" 
+    [hidden]="item.hyperlinkDescr === null"
+    *ngFor="let item of image.children"
+    value="{{item.hyperLinkText}}" 
+   (click)="openNewTab(item.hyperLinkText)">
+    <b id="refID">Reference - </b>{{item.hyperlinkDescr}}</li > 
+
+    <li [ngStyle]="{'margin-left': '3em'}" 
+    id="ref" 
+    type="button" 
+    [hidden]="item.courseName === null"
+    *ngFor="let item of image.children"
+    value="{{item.docLinkID}}" 
+    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docLinkID}}">
+    <b id="refID">See Document - </b>{{item.courseName}}</li>
+    
   </p>
 
+
+  <!--Prints line for bottom level-->
   <p [ngStyle]="{'margin-left': '6em'}"
-    *ngIf="(image.indent2 === null || image.indent2.trim()) && (image.children !== null || image.children.trim())">
+    *ngIf="(image.indent2 === null || image.indent2.trim()) && (image.children !== null || image.children.trim()) ">
+
     <strong>{{image.lineNbr}}</strong>
     <strong>{{image.indent2}}</strong>
-    <span [ngStyle]="{'margin-left': '10px'}">{{image.docText}}</span><br>
-    <img *ngFor="let item of image.children"  class="img" [src]="('data:image/jpeg;base64,' + item.fileData)" /><br>
-    <span [ngStyle]="{'margin-left': '3em'}" id="ref" type="button" *ngFor="let x of image.children"><b id="refID">Reference - </b>{{x.hyperlinkDescr}}</span>
+
+    <span [ngStyle]="{'margin-left': '10px'}">
+      {{image.docText}}</span><br>
+
+    <img 
+    *ngFor="let item of image.children"  
+    class="img" 
+    [hidden]="item.fileData === null"
+    [src]="('data:image/jpeg;base64,' + item.fileData)" /> 
+
+    <br>
+
+    <li [ngStyle]="{'margin-left': '3em'}" 
+    id="ref" 
+    type="button" 
+    [hidden]="item.hyperlinkDescr === null"
+    *ngFor="let item of image.children"
+    value="{{item.hyperLinkText}}" 
+   (click)="openNewTab(item.hyperLinkText)">
+    <b id="refID">Reference - </b>{{item.hyperlinkDescr}}</li> 
+
+    <li [ngStyle]="{'margin-left': '3em'}" 
+    id="ref" 
+    type="button" 
+    [hidden]="item.courseName === null"
+    *ngFor="let item of image.children"
+    value="{{item.DocLinkID}}" 
+   >
+    <b id="refID">See Document - </b>{{item.courseName}}</li>
+    
   </p>
 
 </div>

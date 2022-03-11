@@ -19,6 +19,7 @@ export class DocListComponent implements OnInit {
  list6: any = [];
  media: any = [];
  genLink: any = [];
+ docLink: any = [];
  indent1 = false;
  indent2 = false;
  showModal!: boolean;
@@ -33,6 +34,7 @@ export class DocListComponent implements OnInit {
       this.getDocSections(d['docId'])
       this.getImage(d['docId'])
       this.getDocLink(d['docId'])
+      this.getLinks(d['docId'])
     })
 
     
@@ -70,18 +72,24 @@ export class DocListComponent implements OnInit {
     })
   }
 
+  getLinks(docId: number){
+    this.restApiService.getDocumentLinks(docId).subscribe((docsLink) => {
+      this.docLink = docsLink
+    })
+  }
+
   filterLayout(){
     const parseResult = () =>{
       const sections: Array<[any]> = this.section
       const images: Array<[any]> = this.image
       const links: Array<[any]> = this.genLink
+      const docLinks: Array<[]> = this.docLink
       const filter: any = {};
       const genLinkFilter: any = {};
       for (this.list3 of sections){
         filter[`docSectionID${this.list3.docSectionID}`] = this.list3;
         filter[`docSectionID${this.list3.docSectionID}`].children = [];
-        // filter[`docSectionID${this.list3.docSectionID}`].children = [];// Trying to get list of reference links
-
+        
         for (this.list4 of images) {
           if (this.list4.docSectionID === this.list3.docSectionID){
             filter[`docSectionID${this.list3.docSectionID}`].children.push(this.list4)
@@ -91,9 +99,11 @@ export class DocListComponent implements OnInit {
           if (this.list5.docSectionID === this.list3.docSectionID){
             filter[`docSectionID${this.list3.docSectionID}`].children.push(this.list5)
           }
-          // if (this.list5.hyperLinkDescr !== null){
-          //   this.list5.hyperLinkDescr.trim()
-          // }
+        }
+        for (this.list6 of docLinks){
+          if (this.list6.docSectionID === this.list3.docSectionID){
+            filter[`docSectionID${this.list3.docSectionID}`].children.push(this.list6)
+          }
         }
       }
       console.log(filter)
@@ -101,6 +111,10 @@ export class DocListComponent implements OnInit {
     parseResult();
     
   };
+
+  openNewTab(hyperLinkText: string){
+    window.open(hyperLinkText, "_blank");
+  }
 
   // filterLinks(){
   //   const parseLinks = () =>{

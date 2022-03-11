@@ -1,4 +1,4 @@
-h2{
+h1{
     text-align: center;
     margin-top: 20px;
     font-family: "Oxygen", Arial, Helvetica, sans-serif;
@@ -42,4 +42,8 @@ img:hover{
 
 #refID{
     color: black;
+}
+
+li{
+    list-style-type: none;
 }

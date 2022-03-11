@@ -30,6 +30,11 @@ export class RestApiService  {
     
   }
 
+  getDocumentLinks(docId: number){
+    let links = `http://10.51.8.92:443/api/VWIDocument/GetDocLink/${docId}`;
+    return this.http.get(links)
+  }
+
   getGenLink(docId: number){
     let docLink = `http://10.51.8.92:443/api/VWIDocument/GetGenLink/${docId}`;
     return this.http.get(docLink)
@@ -73,7 +78,6 @@ export class RestApiService  {
   }
   
   getJobCode(event: any){
-   
     return this.http.get(`http://10.51.8.92:443/api/VWIDocument/GetJobCode/${event}`, event);
   }
 
