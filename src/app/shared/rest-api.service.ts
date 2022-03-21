@@ -22,6 +22,8 @@ export class RestApiService  {
   apiGetDocGroup = `http://10.51.8.92:443/api/VWIDocument/GetGroupByWCJC/{WC}/{JC}`;
   apiGetCourseByGroup = `http://10.51.8.92:443/api/VWIDocument/GetWCJCGroup/{WC}/{JC}`;
   
+  url = 'https://translation.googleapis.com/language/translate/v2?key=';
+  key = '';
 
   constructor(private http: HttpClient) { }
   loadedResult!: {};
@@ -63,8 +65,8 @@ export class RestApiService  {
   }
 
   getTitle(docId: number) {
-      let url = `http://10.51.8.92:443/api/VWIDocument/GetTitle/${docId}`
-      return this.http.get(url)
+      let dU = `http://10.51.8.92:443/api/VWIDocument/GetTitle/${docId}`
+      return this.http.get(dU)
   }
 
   getCourseList() {
@@ -73,8 +75,8 @@ export class RestApiService  {
   }
 
   getWorkCenter(){
-    let url = 'http://10.51.8.92:443/api/VWIDocument/GetWorkCenter';
-    return this.http.get(url);
+    let wC = 'http://10.51.8.92:443/api/VWIDocument/GetWorkCenter';
+    return this.http.get(wC);
   }
   
   getJobCode(event: any){
@@ -99,7 +101,10 @@ export class RestApiService  {
     }) 
   }
 
- 
+  
+//   translate(obj: GoogleObj){
+//     return this.http.post(this.url + this.key, obj);
+//  }
    
  
 }

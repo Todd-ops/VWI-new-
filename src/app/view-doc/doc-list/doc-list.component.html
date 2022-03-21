@@ -5,6 +5,7 @@
   <h6>
     Revision Date: {{item.revDate | date: 'yyyy-MM-dd'}}
   </h6>
+  <!-- <button id=”translatebtn” (click)=”send()”>Translate</button> -->
 </div>
 
 <!--Prints line for top level-->
@@ -38,7 +39,8 @@
     [hidden]="item.docLinkID === null"
     *ngFor="let item of image.children"
     value="{{item.DocLinkID}}" 
-   >
+    (click)="filterLayout()"
+    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docLinkID}}">
     <b id="refID">See Document - </b>{{item.courseName}}</li>
   </p>
 
@@ -76,6 +78,7 @@
     [hidden]="item.courseName === null"
     *ngFor="let item of image.children"
     value="{{item.docLinkID}}" 
+    (click)="filterLayout()"
     routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docLinkID}}">
     <b id="refID">See Document - </b>{{item.courseName}}</li>
     
@@ -115,11 +118,20 @@
     [hidden]="item.courseName === null"
     *ngFor="let item of image.children"
     value="{{item.DocLinkID}}" 
-   >
+    (click)="filterLayout()"
+    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docLinkID}}">
     <b id="refID">See Document - </b>{{item.courseName}}</li>
     
   </p>
 
+  <div id="google_translate_element" style="position: absolute; z-index: 10000; right: 0"></div>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+  }
+</script>
 </div>
+
+
 
 

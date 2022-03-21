@@ -25,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'view-doc', component: ViewDocComponent},
   { path: 'view-doc/:docId', component: DocListComponent},
   { path: 'doc-list/:docId', component: ViewDocComponent},
+  { path: 'doc-list/:docLinkID', component: ViewDocComponent}
   // { path: '**', component: PageNotFoundComponent } //Page for wildcard routing = 404 error handler TODO
 ]
 
@@ -44,7 +45,9 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {
+      scrollPositionRestoration: 'top'
+    }),
     MaterialModule,
     MatFormFieldModule,
     MatButtonModule,

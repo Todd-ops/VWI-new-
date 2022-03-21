@@ -1,7 +1,8 @@
 import { style } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { APP_ID, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestApiService } from '../../shared/rest-api.service';
+import { GoogleObj } from '../../shared/GoogleObj'
 
 @Component({
   selector: 'app-doc-list',
@@ -23,6 +24,7 @@ export class DocListComponent implements OnInit {
  indent1 = false;
  indent2 = false;
  showModal!: boolean;
+
   constructor(private activatedRoute: ActivatedRoute, private restApiService: RestApiService) {
     
    }
@@ -85,7 +87,6 @@ export class DocListComponent implements OnInit {
       const links: Array<[any]> = this.genLink
       const docLinks: Array<[]> = this.docLink
       const filter: any = {};
-      const genLinkFilter: any = {};
       for (this.list3 of sections){
         filter[`docSectionID${this.list3.docSectionID}`] = this.list3;
         filter[`docSectionID${this.list3.docSectionID}`].children = [];
@@ -113,30 +114,17 @@ export class DocListComponent implements OnInit {
   };
 
   openNewTab(hyperLinkText: string){
-    window.open(hyperLinkText, "_blank");
+    window.open(hyperLinkText, "_parent");
   }
 
-  // filterLinks(){
-  //   const parseLinks = () =>{
-  //     const sections: Array<[any]> = this.section
-  //     const links: Array<[any]> = this.genLink
-  //     const filter: any = {};
-  //     for (this.list6 of sections){
-  //       filter[`docSectionID${this.list6.docSectionID}`] = this.list6;
-  //       filter[`docSectionID${this.list6.docSectionID}`].children = [];
-
-  //       for (this.list5 of links){
-  //         if (this.list5.docSectionID === this.list6.docSectionID){
-  //           filter[`docSectionID${this.list6.docSectionID}`].children.push(this.list5)
-  //         }
-  //       }
-  //     }
-  //     console.log(filter)
-  //   }
-  //   parseLinks();
-  // };
-
   
+   
 
 
+  // send() {
+  //   const googleObj: GoogleObj = {
+  //   q: 'hello',
+  //   target: 'es'
+  //   };
+  
 }
