@@ -37,8 +37,9 @@ export class DocListComponent implements OnInit {
       this.getImage(d['docId'])
       this.getDocLink(d['docId'])
       this.getLinks(d['docId'])
+      // this.filterLayout()
     })
-
+    this.filterLayout()
     
   }
 
@@ -52,6 +53,7 @@ export class DocListComponent implements OnInit {
     this.restApiService.getDocSectWithText(docId).subscribe((sections) => {
       this.section = sections
       // console.log(this.section)
+      this.filterLayout()
     })
     
   }
@@ -69,7 +71,7 @@ export class DocListComponent implements OnInit {
     this.restApiService.getGenLink(docId).subscribe((link) => {
       this.genLink = link
       console.log(this.genLink)
-      // this.filterLinks()
+      this.filterLayout()
       
     })
   }
@@ -77,6 +79,7 @@ export class DocListComponent implements OnInit {
   getLinks(docId: number){
     this.restApiService.getDocumentLinks(docId).subscribe((docsLink) => {
       this.docLink = docsLink
+      this.filterLayout()
     })
   }
 
@@ -114,7 +117,11 @@ export class DocListComponent implements OnInit {
   };
 
   openNewTab(hyperLinkText: string){
-    window.open(hyperLinkText, "_parent");
+    window.open(hyperLinkText, "_blank");
+  }
+
+  printPage(){
+    window.print();
   }
 
   

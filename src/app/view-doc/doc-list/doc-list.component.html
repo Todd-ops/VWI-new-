@@ -1,11 +1,13 @@
+<div *ngIf="!title?.length"><h1>Please select</h1></div>
 <div *ngFor="let item of title">
+  <button class="noPrint" (click)="printPage()">Print</button>
   <h1 >
     {{item.courseName}}
   </h1>
   <h6>
     Revision Date: {{item.revDate | date: 'yyyy-MM-dd'}}
   </h6>
-  <!-- <button id=”translatebtn” (click)=”send()”>Translate</button> -->
+  
 </div>
 
 <!--Prints line for top level-->
@@ -40,7 +42,7 @@
     *ngFor="let item of image.children"
     value="{{item.DocLinkID}}" 
     (click)="filterLayout()"
-    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docLinkID}}">
+    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/view-doc/{{item.docLinkID}}">
     <b id="refID">See Document - </b>{{item.courseName}}</li>
   </p>
 
@@ -79,7 +81,7 @@
     *ngFor="let item of image.children"
     value="{{item.docLinkID}}" 
     (click)="filterLayout()"
-    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docLinkID}}">
+    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/view-doc/{{item.docLinkID}}">
     <b id="refID">See Document - </b>{{item.courseName}}</li>
     
   </p>
@@ -119,7 +121,7 @@
     *ngFor="let item of image.children"
     value="{{item.DocLinkID}}" 
     (click)="filterLayout()"
-    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docLinkID}}">
+    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/view-doc/{{item.docLinkID}}">
     <b id="refID">See Document - </b>{{item.courseName}}</li>
     
   </p>

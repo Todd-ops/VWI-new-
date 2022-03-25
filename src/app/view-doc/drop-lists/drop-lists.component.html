@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title><h2>Search Visual Work Instruction</h2> </mat-card-title>
 
-  <form [formGroup]="searchForm" (ngSubmit)="submit()" >
+  <form [formGroup]="searchForm" >
     <div class="row">
       <div class="col">
         <select formControlName="WorkCenter" class="form-select col-6" (change)="onSelect1($event)">
@@ -35,8 +35,9 @@
     <div [id]="'collapse'+i" class="accordion-collapse collapse"  [attr.aria-labelledby]="'heading'+i" data-bs-parent="#accordionFlushExample" >
       <div class="accordion-body" *ngFor="let item of group.children" >
         <ol >
-          <li type="button" value="{{item.docID}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/doc-list/{{item.docID}}"><u>{{item.courseName}}</u></li>
+          <li type="button" value="{{item.docID}}"  routerLink="/view-doc/{{item.docID}}" routerLinkActive="activebutton"><u>{{item.courseName}}</u></li>
         </ol>
+        <p><router-outlet></router-outlet></p>
         
         <!-- <ul>
           <li routerLink (click)="getDoc($event)"> 

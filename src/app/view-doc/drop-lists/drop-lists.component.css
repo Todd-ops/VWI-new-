@@ -49,6 +49,17 @@
     font-family: "Oxygen", Arial, Helvetica, sans-serif;
     font-size: 30px;
     margin-top: 200px;
+
+  }
+
+  @media print{
+    .accordion{
+      display: none !important;
+    }
+    mat-card{
+      display: none !important;
+    }
+
   }
 
   .accordion-body{

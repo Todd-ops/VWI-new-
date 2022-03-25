@@ -33,7 +33,7 @@ img{
 
 img:hover{
     -webkit-transform:scale(100); /* or some other value */
-    transform:scale(10);
+    transform:scale(8);
 }
 
 #ref{
@@ -46,4 +46,20 @@ img:hover{
 
 li{
     list-style-type: none;
+}
+
+@media print {
+    .noPrint{
+        display: none !important;
+        
+    }
+}
+
+.noPrint{
+    margin-left: 50%;
+    margin-top: 10px;
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: dodgerblue;
+    color: dodgerblue;
 }

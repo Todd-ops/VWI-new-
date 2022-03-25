@@ -23,11 +23,33 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/search-doc', pathMatch: 'full'},
   { path: 'search-doc', component: SearchDocComponent }, 
   { path: 'view-doc', component: ViewDocComponent},
-  { path: 'view-doc/:docId', component: DocListComponent},
+  { path: 'view-doc/:docId', component: ViewDocComponent},
   { path: 'doc-list/:docId', component: ViewDocComponent},
   { path: 'doc-list/:docLinkID', component: ViewDocComponent}
-  // { path: '**', component: PageNotFoundComponent } //Page for wildcard routing = 404 error handler TODO
 ]
+  // { path: 'view-doc', 
+  //   component: ViewDocComponent,
+  //   children: [
+  //   {
+  //     path: 'view-doc/:docId', 
+  //     component: DocListComponent,
+  //   }]
+  // }]
+  //   {
+  //     path: 'doc-list/:docId', 
+  //     component: ViewDocComponent,
+  //   },
+  //   {
+  //     path: 'doc-list/:docLinkID', 
+  //     component: ViewDocComponent,
+  //   }]
+  // },
+  // { path: 'view-doc/:docId', component: DocListComponent},
+  // { path: 'doc-list/:docId', component: ViewDocComponent},
+  // { path: 'doc-list/:docLinkID', component: ViewDocComponent}
+  // { path: '**', component: PageNotFoundComponent } //Page for wildcard routing = 404 error handler TODO
+
+  
 
 @NgModule({
   declarations: [			
