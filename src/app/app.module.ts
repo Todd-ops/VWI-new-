@@ -24,6 +24,7 @@ const appRoutes: Routes = [
   { path: 'search-doc', component: SearchDocComponent }, 
   { path: 'view-doc', component: ViewDocComponent},
   { path: 'view-doc/:docId', component: ViewDocComponent},
+  { path: 'view-doc/:docLinkID', component: ViewDocComponent},
   { path: 'doc-list/:docId', component: ViewDocComponent},
   { path: 'doc-list/:docLinkID', component: ViewDocComponent}
 ]
