@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DropListsComponent } from './view-doc/drop-lists/drop-lists.component';
 import { DocListComponent } from './view-doc/doc-list/doc-list.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 const appRoutes: Routes = [
@@ -69,7 +70,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {
-      scrollPositionRestoration: 'top'
+      scrollPositionRestoration: 'top',
+      useHash: true 
     }),
     MaterialModule,
     MatFormFieldModule,
@@ -80,7 +82,7 @@ const appRoutes: Routes = [
     MatDividerModule
     
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
